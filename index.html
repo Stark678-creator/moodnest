@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MoodNest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>You don’t have to be okay here.</h1>
+    <p>Select your mood</p>
+
+    <div class="moods">
+      <button onclick="selectMood()">😞</button>
+      <button onclick="selectMood()">😐</button>
+      <button onclick="selectMood()">😊</button>
+      <button onclick="selectMood()">⚡</button>
+    </div>
+
+    <div id="choice" class="hidden">
+      <p>What do you need right now?</p>
+      <button onclick="showComfort()">🫂 Comfort me</button>
+      <button onclick="showEngage()">🚀 Engage me</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
