@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MoodNest – AI Chat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f0c29;
+  color:white;
+}
+.top{
+  padding:20px;
+  text-align:center;
+}
+.chat{
+  max-width:800px;
+  margin:auto;
+  padding:10px;
+}
+.msg{
+  padding:12px;
+  margin:10px;
+  border-radius:15px;
+  max-width:70%;
+}
+.user{
+  background:#333;
+  margin-left:auto;
+  text-align:right;
+}
+.ai{
+  background:#7f5af0;
+}
+input,button{
+  padding:10px;
+  margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+  <h2>Welcome, <span id="name"></span></h2>
+  <p>Tokens: <span id="tokens"></span></p>
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div style="text-align:center">
+  <input id="msg" placeholder="Type your message">
+  <button onclick="send()">Send</button>
+</div>
+
+<script>
+const API="https://YOUR-BACKEND-URL"; // 🔴 SAME BACKEND URL
+
+name.innerText = localStorage.getItem("name");
+tokens.innerText = localStorage.getItem("tokens");
+
+function send(){
+  fetch(API+"/chat",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      token:localStorage.getItem("token"),
+      message:msg.value
+    })
+  }).then(r=>r.json()).then(d=>{
+    chat.innerHTML += `<div class="msg user">${msg.value}</div>`;
+    chat.innerHTML += `<div class="msg ai">${d.reply}</div>`;
+    tokens.innerText = d.tokens;
+    msg.value="";
+  });
+}
+</script>
+
+</body>
+</html>
